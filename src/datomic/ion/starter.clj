@@ -85,7 +85,7 @@ against a connection. Returns connection"
   "Web handler that returns the schema for datomic-docs-tutorial"
   [{:keys [headers body]}]
   {:status 200
-   :headers {"Content-Type" "application/edn"} 
+   :headers {"Content-Type" "application/edn"}
    :body (-> (get-connection) d/db schema pp-str)})
 
 (def get-tutorial-schema
@@ -94,7 +94,7 @@ against a connection. Returns connection"
 
 (defn echo
   "Lambda ion that simply echoes its input"
-  [{:keys [contect input]}]
+  [{:keys [context input]}]
   input)
 
 (defn items-by-type*
@@ -127,7 +127,7 @@ against a connection. Returns connection"
   (let [type (some-> body read-edn)]
     (if (keyword? type)
       {:status 200
-       :headers {"Content-Type" "application/edn"} 
+       :headers {"Content-Type" "application/edn"}
        :body (-> (items-by-type* (d/db (get-connection)) type)
                  pp-str)}
       {:status 400
@@ -166,4 +166,3 @@ should be featured in a promotion."
     (and (= (:db/ident color) :green)
          (= (:db/ident size) :xlarge)
          (= (:db/ident type) :hat))))
-
